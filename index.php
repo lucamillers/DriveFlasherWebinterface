@@ -62,6 +62,27 @@
     }
 
   </script>
-
+<script>
+  const checkboxes = document.querySelectorAll("input[type='checkbox']");
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener("click", function() {
+      const parentRow = this.parentNode.parentNode;
+      const backgroundColor = window.getComputedStyle(parentRow).getPropertyValue("background-color");
+      console.log("current backgroundColor: " + backgroundColor);
+      if (backgroundColor) {
+        const colorValues = backgroundColor.match(/\d+(\.\d+)?/g);
+        let newGreenValue = parseFloat(colorValues[1]);
+        if (this.checked) {
+          newGreenValue += 20;
+        } else {
+          newGreenValue -= 20;
+        }
+        console.log("newGreenValue: " + newGreenValue);
+        parentRow.style.backgroundColor = `rgba(${colorValues[0]}, ${newGreenValue}, ${colorValues[2]}, ${colorValues[3]})`;
+        console.log(`New color: rgba(${colorValues[0]}, ${newGreenValue}, ${colorValues[2]}, ${colorValues[3]})`);
+      }
+    });
+  });
+</script>
 </body>
 </html>

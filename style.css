@@ -80,10 +80,14 @@ table.responsive tbody td {
     border-bottom-width: thin;
 }
 table.responsive tr:nth-child(even) {
-    background: rgba(72, 72, 72, 0.8);
+    background-color: rgba(72, 72, 72, 0.8);
 }
+table.responsive tr:nth-child(odd) {
+    background-color: rgba(82, 84, 81, 0.8);
+}
+
 table.responsive thead {
-    background: rgba(46, 47, 45, 0.8);
+    background-color: rgba(46, 47, 45, 0.8);
     border-bottom: 12px solid rgba(49, 49, 49, 0.8);
 }
 table.responsive thead th {
