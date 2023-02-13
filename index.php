@@ -14,13 +14,11 @@
       </div>
       <input type="submit" value="Upload">
     </form>
-  </div>
-
-<div class="container">
   <table class="responsive">
       <tr>
         <th>Drive</th>
         <th>Size (GB)</th>
+        <th>Flash drive</th>
       </tr>
       <?php
         exec('lsblk -d --output NAME,SIZE', $output);
@@ -31,11 +29,11 @@
             if (preg_match('/[Mm]/', $matches[2])) {
               $size = $size / 1024;
             }
-            echo "<tr><td>$drive</td><td>$size</td></tr>\n";
+            echo "<tr><td>$drive</td><td>$size</td><td><input type='checkbox'></td></tr>\n";
           }
         }
       ?>
   </table>
-</div>
+  </div>
 </body>
 </html>
