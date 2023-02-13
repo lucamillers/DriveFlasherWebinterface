@@ -9,7 +9,13 @@ body {
     background-position: center, center;
     margin: 0;
 }
-.container {
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+.drive-selection-container {
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -6,15 +6,17 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <form action="upload.php" method="post" enctype="multipart/form-data">
+  <div class="upload-container">
+    <form>
       <div class="form-group">
         <input type="file" name="file" id="file">
         <label for="file">Choose a file</label>
       </div>
-      <input type="submit" value="Upload">
+      <input type="submit" value="Upload" method=POST enctype=multipart/form-data  onclick="uploadFile()">
     </form>
-  <table class="responsive">
+  </div>
+  <div class="drive-selection-container">
+    <table class="responsive">
       <tr>
         <th>Drive</th>
         <th>Size (GB)</th>
@@ -33,7 +35,33 @@
           }
         }
       ?>
-  </table>
+    </table>
   </div>
+
+
+
+  <script>
+    function uploadFile() {
+      event.preventDefault();
+      var file = document.getElementById("file").files[0];
+      var formData = new FormData();
+      formData.append("file", file);
+      
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "upload.php", true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            console.log("File uploaded successfully!");
+          } else {
+            console.log("File upload failed, status code: " + xhr.status);
+          }
+        }
+      };
+      xhr.send(formData);
+    }
+
+  </script>
+
 </body>
 </html>
