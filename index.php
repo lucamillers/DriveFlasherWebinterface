@@ -11,16 +11,17 @@
   
   <div class="file-upload-container">
     <h4 class="headline">Select a file to upload</h4>
+    <div id="selected-file-name">No file selected</div>
     <form>
       <div class="form-group">
         <input type="file" name="file" id="file" onchange="updateSelectedFile(this)" accept=".iso">
-        <label for="file">Choose a file</label>
+        <div><label for="file">Choose a file</label></div>
     </form>
-    <div id="selected-file-name">No file selected</div>
 
     <input type="submit" value="Upload" method=POST enctype=multipart/form-data onclick="uploadFile()">
   </div>
   </div>
+
   <div class="table-flash-container">
   <h4 class="headline">Select the drives to flash</h4>
     <table class="responsive" disabled>
@@ -30,16 +31,16 @@
         <th>Flash drive?</th>
       </tr>
       <?php
-      exec('lsblk -d --output NAME,SIZE', $output);
+      exec("lsblk -d --output NAME,SIZE", $output);
       foreach ($output as $line) {
-        if (preg_match('/^(.*)\s+(\d+[G|M])$/', $line, $matches)) {
-          $drive = $matches[1];
-          $size = preg_replace('/[GgMm]/', '', $matches[2]);
-          if (preg_match('/[Mm]/', $matches[2])) {
-            $size = $size / 1024;
+          if (preg_match('/^(.*)\s+(\d+[G|M])$/', $line, $matches)) {
+              $drive = $matches[1];
+              $size = preg_replace("/[GgMm]/", "", $matches[2]);
+              if (preg_match("/[Mm]/", $matches[2])) {
+                  $size = $size / 1024;
+              }
+              echo "<tr><td>$drive</td><td>$size</td><td><input type='checkbox' disabled></td></tr>\n";
           }
-          echo "<tr><td>$drive</td><td>$size</td><td><input type='checkbox' disabled></td></tr>\n";
-        }
       }
       ?>
     </table>
