@@ -8,19 +8,21 @@
 </head>
 
 <body>
+  
   <div class="file-upload-container">
-    <h4>Select a file to upload</h4>
+    <h4 class="headline">Select a file to upload</h4>
     <form>
       <div class="form-group">
         <input type="file" name="file" id="file" onchange="updateSelectedFile(this)" accept=".iso">
         <label for="file">Choose a file</label>
     </form>
-    <div id="selected-file-name"></div>
+    <div id="selected-file-name">No file selected</div>
 
     <input type="submit" value="Upload" method=POST enctype=multipart/form-data onclick="uploadFile()">
   </div>
   </div>
   <div class="table-flash-container">
+  <h4 class="headline">Select the drives to flash</h4>
     <table class="responsive" disabled>
       <tr>
         <th>Drive</th>
@@ -43,13 +45,13 @@
     </table>
     <button class="button btnFlash" type="button" disabled>Flash drive!</button>
   </div>
+
   <script>
 function uploadFile() {
   event.preventDefault();
   var file = document.getElementById("file").files[0];
   var formData = new FormData();
   formData.append("file", file);
-
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "upload.php", true);
   xhr.onreadystatechange = function () {
