@@ -4,6 +4,7 @@ html, body {
     height: 100%;
 }
 body {
+    display: flex;
     background-image: url("bg.jpg");
     backdrop-filter: blur(5px);
     background-size: auto;
@@ -11,6 +12,12 @@ body {
     margin: 0;
     padding-top: 15px;
     overflow: hidden;
+    flex-flow: row;
+    @media screen and (max-width: 992px) {
+	body{
+            flex-flow: column;
+	}
+    };
 }
 
 .headline {
@@ -19,39 +26,37 @@ body {
 }
 .file-upload-container {
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
     align-items: center;
     padding: 2em;
     width: 30%;
     background-color: #1313136b;
     margin: auto;
     border-radius: 15px;
-    margin-bottom: 1%;
+    /*! margin-bottom: 1%; */
 }
 .table-flash-container {
     display: flex;
-    flex-direction: column;
+    flex-flow: column;
     align-items: center;
     padding: 2em;
     width: 30%;
     background-color: #1313136b;
     margin: auto;
     border-radius: 15px;
-    margin-bottom: 1%;
-    margin-top: 1%;
+    /*! margin-bottom: 1%; */
+    /*! margin-top: 1%; */
     overflow: auto;
     padding-top: 0;
 }
 form {
-    width: 100%;
-    max-width: 500px;
-    margin: 2em auto;
-    text-align: center;
-    margin-bottom: 0;
+    margin: 2em 0;
 }
 .form-group {
     position: relative;
-    margin: 2em 0;
+    display: flex;
+    flex-flow: column wrap;
+    text-align: center;
 }
 #file {
     opacity: 0;
@@ -70,6 +75,8 @@ label[for="file"] {
     color: #333;
     border-radius: 5px;
     cursor: pointer;
+    margin-bottom: 0.5em;
+    transition: all 0.2s ease;
 }
 input[type="submit"] .progress {
     margin: 2em 0;
@@ -161,6 +168,7 @@ table.responsive tfoot .links a{
     color: #333;
     border-radius: 5px;
 
+    transition: all 0.2s ease;
 }
 
 button[disabled=disabled], button:disabled {
@@ -240,4 +248,19 @@ button[disabled=disabled], button:disabled {
     margin-top: 10px;
     color:#ddd;
     font-size: large;
+    border: 1px solid grey;
+    padding: 1.5em;
   }
+
+label:hover {
+  filter: invert(1);
+}
+.button:hover {
+  background-color: #508C50;
+}
+.button.btnFlash:hover:disabled {
+  background: #cc4646;
+}
+.button.btnFlash:hover:enabled {
+  background: green;
+}
