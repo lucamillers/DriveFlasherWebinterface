@@ -12,13 +12,17 @@
   <div class="file-upload-container">
     <h4 class="headline">Select a file to upload</h4>
     <div id="selected-file-name">No file selected</div>
-    <form>
+    <form method=POST enctype=multipart/form-data onsubmit="uploadFile()">
       <div class="form-group">
         <input type="file" name="file" id="file" onchange="updateSelectedFile(this)" accept=".iso">
         <div><label for="file">Choose a file</label></div>
     </form>
 
-    <input type="submit" value="Upload" method=POST enctype=multipart/form-data onclick="uploadFile()">
+    <div class="progress-btn" data-progress-style="fill-back">
+    <button class="button" type="submit">Upload</button>
+	  <div class="progress"></div>
+	</div>
+
   </div>
   </div>
 
@@ -100,6 +104,20 @@ function uploadFile() {
         }
       });
     });
+
+
+    $(document).ready(function() {
+  $(".progress-btn").on("click", function() {
+    var progressBtn = $(this);
+    
+    if (!progressBtn.hasClass("active")) {
+      progressBtn.addClass("active");
+      setTimeout(function() {
+        progressBtn.removeClass("active");
+      }, 10000);
+    }
+  })
+});
   </script>
 </body>
 
